@@ -14,5 +14,4 @@ function resetAll(){
     while (carrito.rows.length > 1) {
         carrito.deleteRow(1);
     }
-    
 }
