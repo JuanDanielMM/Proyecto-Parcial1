@@ -1,4 +1,4 @@
-var port, textEncoder, writableStreamClosed, writer, i= 0, j= 1;
+var i= 0, j= 1;
 
 const Peso = document.getElementById('pesoVenta');
 const total = document.getElementById('costoVenta');
@@ -34,7 +34,6 @@ var preciosOrden = new Array();
 
 requestProducts.done(function (response) {
   productos = response;
-  console.log(productos);
   for (let index = 0; index < response.data.length; index++) {
     const opt = document.createElement('option');
     opt.value = index;
@@ -59,10 +58,15 @@ requestProducts.fail(function (jqXHR, textStatus, errorThrown) {
 });
 
 function eliminar(indice){
-    var casilla = "precio" + (j-1);
+    var casilla = "precio" + indice;
     var restando = document.getElementById(casilla).innerText
     total.innerText = parseFloat(total.innerText) - parseFloat(restando.replace(/\$/, ''));
     document.getElementById(indice).remove();
+    delete idProdOrden[indice - 1];
+    console.log(idProdOrden);
+    delete console[indice - 1];
+    delete cantOrden[indice - 1];
+    delete preciosOrden[indice - 1];
     j--;
     i--;
 }
@@ -75,7 +79,7 @@ $("#add").click(function(){
             var ant = parseFloat(total.innerText).toFixed(2);
             total.innerText = (parseFloat(total.innerText) + total_aux);
         }else {
-            total.innerText = total_aux
+            total.innerText = total_aux;
         }
     }else{
         window.alert("Ingrese una cantidad valida");
@@ -109,9 +113,24 @@ var obj = {
         },
         dataType: "json",};
 
+function resetAll(){
+    idProdOrden = [];
+    cantOrden = [];
+    preciosOrden = [];
+    total.innerText = 0;
+    catidad.value = 0;
+    while (carrito.rows.length > 1) {
+        carrito.deleteRow(1);
+    }
+    
+}
+
 form.addEventListener('submit', e => {
     e.preventDefault();
-    console.log(obj);
+    idProdOrden = $.grep(idProdOrden,function(n){return n == 0 || n});
+    cantOrden = $.grep(cantOrden,function(n){return n == 0 || n});
+    preciosOrden = $.grep(preciosOrden,function(n){return n == 0 || n});
+    console.log(idProdOrden);
     for (let index = 0; index < idProdOrden.length; index++) {
         
         datos.push({
@@ -123,12 +142,9 @@ form.addEventListener('submit', e => {
                 },
             },
         });
-        
     }
 
     obj.data.linked.orderItems = datos;
-    console.log(obj);
-
 
     var requestOrders = $.ajax(obj);
 
@@ -140,4 +156,5 @@ form.addEventListener('submit', e => {
     requestOrders.fail(function (jaXHR, textStatus, errorThrown) {
         alert(textStatus, errorThrown);
    });
+   resetAll();
 });
