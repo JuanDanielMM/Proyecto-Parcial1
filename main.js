@@ -142,6 +142,7 @@ form.addEventListener('submit', e => {
     }
 
     obj.data.linked.orderItems = datos;
+  console.log(obj);
 
     var requestOrders = $.ajax(obj);
 
