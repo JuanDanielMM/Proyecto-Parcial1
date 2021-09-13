@@ -50,7 +50,6 @@ function actualizar(opcion) {
   precio.innerHTML = precios[opcion.value];
   name = productos.data[opcion.value].attributes.nombre;
   id = productos.data[opcion.value].attributes.id;
-  console.log(id);
 }
 
 requestProducts.fail(function (jqXHR, textStatus, errorThrown) {
@@ -130,7 +129,6 @@ form.addEventListener('submit', e => {
     idProdOrden = $.grep(idProdOrden,function(n){return n == 0 || n});
     cantOrden = $.grep(cantOrden,function(n){return n == 0 || n});
     preciosOrden = $.grep(preciosOrden,function(n){return n == 0 || n});
-    console.log(idProdOrden);
     for (let index = 0; index < idProdOrden.length; index++) {
         
         datos.push({
