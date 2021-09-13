@@ -62,7 +62,6 @@ function eliminar(indice){
     total.innerText = parseFloat(total.innerText) - parseFloat(restando.replace(/\$/, ''));
     document.getElementById(indice).remove();
     delete idProdOrden[indice - 1];
-    console.log(idProdOrden);
     delete console[indice - 1];
     delete cantOrden[indice - 1];
     delete preciosOrden[indice - 1];
@@ -147,7 +146,6 @@ form.addEventListener('submit', e => {
     var requestOrders = $.ajax(obj);
 
     requestOrders.done(function (response) {
-        console.log(response);
         window.alert("orden creada");
     });
 
