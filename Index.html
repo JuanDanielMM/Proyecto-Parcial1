@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cobrar</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+</head>
+<body>
+    <div class="p-4">
+        <h1>
+            Caja
+        </h1>
+        <div class="pt-4">
+            <form>
+                <div class="card bg-secondary">
+                    <select class="form-select mb-4 mt-2 mr-auto" name="prodselection" id="producto" onchange="actualizar(this)"></select>
+                    <span class="caret">Precio: $ <span class="caret" id="costoUnitario"></span></span> <br>
+                    <span class="caret">Total a cobrar: $<span class="caret" id="costoVenta"></span></span> <br>
+                    <span class="caret">Cantidad: $<input type="number" id="cantidad" value="0" min=1 autofocus ></span> <br>
+                    <button class="btn btn-primary btn-block" id="cobrar">
+                        <span>Generar Orden</span>
+                    </button>
+                </div>
+            </form>
+            <div class="container">
+                <button class="btn btn-primary btn-block m-3" id="add">
+                    <span>Agregar</span>
+                </button>
+                <table class="table table-hover" id="cart">
+                    <tr>
+                        <td>Producto</td>
+                        <td>Cantidad</td>
+                        <td>Precio</td>
+                        <td>Eliminar</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script  type="text/javascript" src="main.js"></script>
+</body>
+</html>
